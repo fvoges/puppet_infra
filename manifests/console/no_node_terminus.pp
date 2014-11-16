@@ -1,4 +1,4 @@
-class puppet_infra::profile::no_node_terminus {
+class puppet_infra::console::no_node_terminus {
   $confdir = '/etc/puppetlabs/puppet'
 
   Pe_ini_setting {
