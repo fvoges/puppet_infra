@@ -1,6 +1,6 @@
 # Class: puppet_infra::profile::master
 #
-class puppet_infra::profile::master inherits puppet_infra::profile::infrastructure {
+class puppet_infra::profile::master inherits puppet_infra::profile::global {
 
   class { 'pe_repo':
     base_path => '/enod/hpc/repos/puppet/pe-packages',

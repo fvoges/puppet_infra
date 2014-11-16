@@ -1,7 +1,7 @@
-# Class: puppet_infra::profile::infrastructure
+# Class: puppet_infra::profile::global
 #
 #
-class puppet_infra::profile::infrastructure {
+class puppet_infra::profile::global {
   class {'puppet_enterprise':
     mcollective_middleware_hosts  => ['pupca01v.enp.aramco.com.sa'],
     database_host                 => 'pupd01.enp.aramco.com.sa',

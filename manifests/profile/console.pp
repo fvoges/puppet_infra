@@ -1,7 +1,7 @@
 # Class: puppet_infra::profile::console
 #
 #
-class puppet_infra::profile::console inherits puppet_infra::profile::infrastructure {
+class puppet_infra::profile::console inherits puppet_infra::profile::global {
   include puppet_enterprise::license
   include puppet_enterprise::profile::console
   include puppet_enterprise::profile::mcollective::console
