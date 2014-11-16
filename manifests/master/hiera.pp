@@ -14,7 +14,7 @@ class puppet_infra::master::hiera (
 
     file {"${::settings::confdir}/hiera.yaml":
             ensure => file,
-            user => "root",
+            owner => "root",
             group => "root",
             mode => "0644",
             content => template($hiera_template),
