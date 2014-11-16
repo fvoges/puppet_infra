@@ -1,8 +1,8 @@
 class puppet_infra::master::hiera (
-    $hiera_base = puppet_infra::params::hiera_base,
-    $hiera_backends = puppet_infra::params::hiera_backends,
-    $hiera_hierarchy = puppet_infra::params::hiera_hierarchy,
-    $hiera_template = puppet_infra::params::hiera_template,
+    $hiera_base = $puppet_infra::params::hiera_base,
+    $hiera_backends = $puppet_infra::params::hiera_backends,
+    $hiera_hierarchy = $puppet_infra::params::hiera_hierarchy,
+    $hiera_template = $puppet_infra::params::hiera_template,
 
 ) inherits  puppet_infra::params
 {
