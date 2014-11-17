@@ -8,7 +8,7 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
 
   validate_string($pe_repo_base_path)
   validate_array($hiera_hierarchy)
-  validate_absolute_path($hiera_base_path)
+  validate_string($hiera_base_path)
 
   class { 'pe_repo':
     base_path => $pe_repo_base_path,
