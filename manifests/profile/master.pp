@@ -4,9 +4,11 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   
   $pe_repo_base_path = hiera('puppet_infra::profile::master::pe_repo_base_path')
   $hiera_hierarchy  = hiera('puppet_infra::profile::master::hiera_hierarchy')
+  $hiera_base_path = hiera('puppet_infra::profile::master::hiera_base')
 
   validate_string($pe_repo_base_path)
   validate_array($hiera_hierarchy)
+  validate_absolute_path($hiera_base_path)
 
   class { 'pe_repo':
     base_path => $pe_repo_base_path,
