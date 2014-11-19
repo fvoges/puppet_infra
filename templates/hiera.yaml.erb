@@ -1,5 +1,5 @@
 ---
-:backends: 
+:backends:
 <% @hiera_backends.each do |backend| -%>
   - <%= backend %>
 <% end -%>
@@ -9,6 +9,6 @@
 <% end -%>
 
 <% @hiera_backends.each do |backend| -%>
-:<%= backend %>:
+:<%= backend %>: 
   :datadir: "<%= @hiera_base %>"
 <% end -%>

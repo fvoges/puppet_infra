@@ -1,5 +1,4 @@
 class puppet_infra::console::noconsole {
-
   $confdir = '/etc/puppetlabs/puppet'
 
   Pe_ini_setting {
@@ -17,4 +16,3 @@ class puppet_infra::console::noconsole {
   }
 
 }
-
