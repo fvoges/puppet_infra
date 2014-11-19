@@ -1,0 +1,14 @@
+---
+:backends:
+<% @hiera_backends.each do |backend| -%>
+  - <%= backend %>
+<% end -%>
+:hierarchy:
+<% @hiera_hierarchy.each do |level| -%>
+  - <%= level %>
+<% end -%>
+
+<% @hiera_backends.each do |backend| -%>
+:<%= backend %>: 
+  :datadir: "<%= @hiera_base %>/%{environment}"
+<% end -%>
