@@ -10,5 +10,5 @@
 
 <% @hiera_backends.each do |backend| -%>
 :<%= backend %>: 
-  :datadir: "<%= @hiera_base %>/%{environment}"
+  :datadir: "<%= @hiera_base %>"
 <% end -%>
