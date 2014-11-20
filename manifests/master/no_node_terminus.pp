@@ -1,5 +1,4 @@
-class puppet_infra::console::no_node_terminus {
-  $confdir = '/etc/puppetlabs/puppet'
+class puppet_infra::master::no_node_terminus {
 
   Pe_ini_setting {
     ensure  => present,
@@ -8,9 +7,10 @@ class puppet_infra::console::no_node_terminus {
 
   pe_ini_setting { 'no_node_terminus' :
     ensure  => absent,
-    path    => "${confdir}/puppet.conf",
+    path    => "${::settings::confdir}/puppet.conf",
     section => 'master',
     setting => 'node_terminus',
+    notify  => Service['pe-puppetserver'],
   }
 
 }

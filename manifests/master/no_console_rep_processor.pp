@@ -1,5 +1,4 @@
-class puppet_infra::console::noconsole {
-  $confdir = '/etc/puppetlabs/puppet'
+class puppet_infra::master::no_console_rep_processor {
 
   Pe_ini_setting {
     ensure  => present,
@@ -8,11 +7,12 @@ class puppet_infra::console::noconsole {
 
   pe_ini_subsetting { 'no_reports_console' :
     ensure               => absent,
-    path                 => "${confdir}/puppet.conf",
+    path                 => "${::settings::confdir}/puppet.conf",
     section              => 'master',
     setting              => 'reports',
     subsetting           => 'console',
     subsetting_separator => ',',
+    notify  => Service['pe-puppetserver'],
   }
 
 }
