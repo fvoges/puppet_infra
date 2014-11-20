@@ -11,7 +11,7 @@ class puppet_infra::profile::global {
   $disable_console              = str2bool(hiera('puppet_infra::profile::global::disable_console'))
   $console_host                 = hiera('puppet_infra::profile::global::console_host', '')
 
-  validate_boolean($disable_console)
+  validate_bool($disable_console)
   if ! $disable_console and ! $console_host {
     fail('puppet_infra::profile::global::console_host is not defined in Hiera or it\'s empty.')
   }
