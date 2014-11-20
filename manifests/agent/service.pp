@@ -3,8 +3,8 @@
 #
 class puppet_infra::agent::service {
   service { 'pe-puppet':
-    enable     => true,
     ensure     => running,
+    enable     => true,
     hasrestart => true,
     hasstatus  => true,
   }

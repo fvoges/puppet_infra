@@ -8,7 +8,13 @@ class puppet_infra::profile::global {
   $puppetdb_host                = hiera('puppet_infra::profile::global::puppetdb_host')
   $puppet_master_host           = hiera('puppet_infra::profile::global::puppet_master_host')
   $certificate_authority_host   = hiera('puppet_infra::profile::global::certificate_authority_host')
-  $console_host                 = hiera('puppet_infra::profile::global::console_host')
+  $disable_console              = str2bool(hiera('puppet_infra::profile::global::disable_console'))
+  $console_host                 = hiera('puppet_infra::profile::global::console_host', '')
+
+  validate_boolean($disable_console)
+  if ! $disable_console and ! $console_host {
+    fail('puppet_infra::profile::global::console_host is not defined in Hiera or it\'s empty.')
+  }
 
   class {'puppet_enterprise':
     mcollective_middleware_hosts => $mcollective_middleware_hosts,

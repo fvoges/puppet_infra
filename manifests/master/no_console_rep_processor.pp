@@ -1,4 +1,4 @@
-class puppet_infra::console::noconsole {
+class puppet_infra::master::no_console_rep_processor {
 
   Pe_ini_setting {
     ensure  => present,

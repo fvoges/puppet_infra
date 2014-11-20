@@ -1,4 +1,4 @@
-class puppet_infra::console::no_node_terminus {
+class puppet_infra::master::no_node_terminus {
 
   Pe_ini_setting {
     ensure  => present,
