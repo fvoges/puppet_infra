@@ -16,6 +16,12 @@ class puppet_infra::profile::global {
     fail('puppet_infra::profile::global::console_host is not defined in Hiera or it\'s empty.')
   }
 
+  if $disable_console {
+    $real_console_host = ''
+  } else {
+    $real_console_host = $console_host
+  }
+
   class {'puppet_enterprise':
     mcollective_middleware_hosts => $mcollective_middleware_hosts,
     database_host                => $database_host,
@@ -28,6 +34,6 @@ class puppet_infra::profile::global {
     puppetdb_database_name       => 'pe-puppetdb',
     puppetdb_database_user       => 'pe-puppetdb',
     puppetdb_port                => '8081',
-    console_host                 => $console_host,
+    console_host                 => $real_console_host,
   }
 }
