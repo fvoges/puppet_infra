@@ -17,6 +17,7 @@ class puppet_infra::master::hiera(
     group   => 'root',
     mode    => '0644',
     content => template($hiera_template),
+    notify  => Service['pe-puppetserver'],
   }
 
 }

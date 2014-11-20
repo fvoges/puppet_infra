@@ -10,6 +10,7 @@ class puppet_infra::master::no_node_terminus {
     path    => "${::settings::confdir}/puppet.conf",
     section => 'master',
     setting => 'node_terminus',
+    notify  => Service['pe-puppetserver'],
   }
 
 }
