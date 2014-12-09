@@ -4,10 +4,12 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   $hiera_hierarchy   = hiera('puppet_infra::profile::master::hiera_hierarchy')
   $hiera_base        = hiera('puppet_infra::profile::master::hiera_base')
   $pe_repo_base_path = hiera('puppet_infra::profile::master::pe_repo_base_path')
+  $manage_r10k       = str2bool(hiera('puppet_infra::profile::master::manage_r10k'))
 
   validate_array($hiera_hierarchy)
   validate_string($hiera_base)
   validate_string($pe_repo_base_path)
+  validete_bool($manage_r10k)
 
   class { 'pe_repo':
     base_path => $pe_repo_base_path,
@@ -33,6 +35,10 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   class {'::puppet_infra::master::hiera':
     hiera_hierarchy => $hiera_hierarchy,
     hiera_base      => $hiera_base,
+  }
+
+  if $manage_r10k {
+    include ::puppet_infra::profile::master::r10k
   }
 
 }

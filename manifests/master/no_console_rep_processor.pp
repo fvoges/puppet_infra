@@ -12,7 +12,7 @@ class puppet_infra::master::no_console_rep_processor {
     setting              => 'reports',
     subsetting           => 'console',
     subsetting_separator => ',',
-    notify  => Service['pe-puppetserver'],
+    notify               => Service['pe-puppetserver'],
   }
 
 }
