@@ -9,14 +9,14 @@ class puppet_infra::agent::config {
   }
 
   pe_ini_setting { 'ca_server' :
-    setting => $::puppet_infra::agent::agent_ca,
+    value => $::puppet_infra::agent::agent_ca,
   }
 
   pe_ini_setting { 'server' :
-    setting => $::puppet_infra::agent::agent_server,
+    value => $::puppet_infra::agent::agent_server,
   }
 
   pe_ini_setting { 'runinterval' :
-    setting => $::puppet_infra::agent::agent_run_interval,
+    value => $::puppet_infra::agent::agent_run_interval,
   }
 }
