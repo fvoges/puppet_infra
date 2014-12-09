@@ -6,11 +6,33 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   $hiera_base        = hiera('puppet_infra::profile::master::hiera_base')
   $pe_repo_base_path = hiera('puppet_infra::profile::master::pe_repo_base_path')
   $manage_r10k       = str2bool(hiera('puppet_infra::profile::master::manage_r10k'))
+  $basemodulepath    = hiera('puppet_infra::profile::master::basemodulepath')
+  $environmentpath   = hiera('puppet_infra::profile::master::environmentpath')
 
   validate_array($hiera_hierarchy)
   validate_string($hiera_base)
   validate_string($pe_repo_base_path)
   validate_bool($manage_r10k)
+  validate_string($basemodulepath)
+  validate_string($environmentpath)
+
+
+  Pe_Ini_setting {
+    ensure => present,
+    path   => "${::settings::confdir}/puppet.conf",
+  }
+
+  pe_ini_setting { 'Configure environmentpath':
+    section => 'main',
+    setting => 'environmentpath',
+    value   => $environmentpath,
+  }
+
+  pe_ini_setting { 'Configure basemodulepath':
+    section => 'main',
+    setting => 'basemodulepath',
+    value   => $basemodulepath,
+  }
 
   class { 'pe_repo':
     base_path => $pe_repo_base_path,
