@@ -44,7 +44,7 @@ class puppet_infra::profile::master::r10k {
   exec {'rm -rf production':
     creates => "${::settings::confdir}/environments/production/Puppetfile",
     command => 'rm -rf /etc/puppetlabs/puppet/environments/production',
-    require => Class['r10k'],
+    require => Class['::r10k'],
     path    => $::path,
   }
 
