@@ -2,6 +2,7 @@
 #
 class puppet_infra::profile::master inherits puppet_infra::profile::global {
   $hiera_hierarchy   = hiera('puppet_infra::profile::master::hiera_hierarchy')
+  $hiera_backends    = hiera('puppet_infra::profile::master::hiera_backends')
   $hiera_base        = hiera('puppet_infra::profile::master::hiera_base')
   $pe_repo_base_path = hiera('puppet_infra::profile::master::pe_repo_base_path')
   $manage_r10k       = str2bool(hiera('puppet_infra::profile::master::manage_r10k'))
