@@ -25,7 +25,7 @@ class puppet_infra::profile::master::r10k {
 
   ##  This section requires the zack/R10k module
 
-  class { 'r10k':
+  class { '::r10k':
     version           => $version,
     sources           => {
       'puppet' => {
