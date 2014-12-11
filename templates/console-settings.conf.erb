@@ -1,0 +1,6 @@
+# See: https://docs.puppetlabs.com/pe/latest/console_config.html
+rbac: {
+ password-reset-expiration: <%= @password_expiration %>
+ session-timeout: <%= @session_timeout %>
+ failed-attempts-lockout: <%= @failed_attempts_lockout %>
+}
