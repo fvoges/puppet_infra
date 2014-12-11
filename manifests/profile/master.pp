@@ -16,7 +16,6 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   validate_string($basemodulepath)
   validate_string($environmentpath)
 
-
   Pe_Ini_setting {
     ensure => present,
     path   => "${::settings::confdir}/puppet.conf",
@@ -62,6 +61,15 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
 
   if $manage_r10k {
     include ::puppet_infra::profile::master::r10k
+  }
+
+  file { '/etc/security/limits.d/pe-puppet.conf':
+    ensure => file,
+    source => "puppet:///modules/${module_name}/pe-puppet-limits.conf",
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    notify => Service['pe-puppetserver'],
   }
 
 }

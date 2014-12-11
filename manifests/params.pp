@@ -7,8 +7,8 @@ class puppet_infra::params {
   $hiera_hierarchy  = ['"%{clientcert}"','global',]
   $hiera_template   = "${module_name}/hiera.yaml.erb"
 
-  $agent_server       = $::server
-  $agent_ca           = $::server
+  $agent_server       = $::servername
+  $agent_ca           = $::servername
   $agent_run_interval = '30m'
 
 }
