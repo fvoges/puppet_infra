@@ -21,7 +21,7 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
 
   file { "/etc/puppetlabs/console-services/conf.d/custom-settings.conf":
     ensure  => file,
-    source  => "puppet:///modules/${module_name}/console-settings.conf.erb",
+    content => template("${module_name}/console-settings.conf.erb"),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
