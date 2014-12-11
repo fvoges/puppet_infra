@@ -65,7 +65,7 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
 
   file { '/etc/security/limits.d/pe-puppet.conf':
     ensure => file,
-    source => 'puppet:///modules/pe-puppet-limits.conf',
+    source => "puppet:///modules/${module_name}/pe-puppet-limits.conf",
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
