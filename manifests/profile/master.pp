@@ -44,13 +44,18 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   include ::puppet_enterprise::profile::master::mcollective
 
   if $::puppet_infra::profile::global::disable_console {
-    $console_host = $::puppet_infra::profile::global::console_host
+    $console_host = ''
     include ::puppet_infra::master::no_console_rep_processor
+  } else {
+    $console_host = $::puppet_infra::profile::global::console_host
   }
 
   if $::puppet_infra::profile::global::disable_classifier {
-    $classifier_host = $::puppet_infra::profile::global::classifier_host
+    $classifier_host = ''
     include ::puppet_infra::master::no_node_terminus
+  } else {
+    $classifier_host = $::puppet_infra::profile::global::classifier_host
+
   }
   class { '::puppet_enterprise::profile::master':
     console_host    => $console_host,
