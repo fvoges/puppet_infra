@@ -6,6 +6,9 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
   $password_reset_expiration = hiera('puppet_infra::profile::console::password_reset_expiration')
   $session_timeout           = hiera('puppet_infra::profile::console::session_timeout')
   $failed_attempts_lockout   = hiera('puppet_infra::profile::console::failed_attempts_lockout')
+  $timezone                  = hiera('puppet_infra::profile::console::timezone')
+  $unresponsive_threshold    = hiera('puppet_infra::profile::console::unresponsive_threshold')
+  $disable_live_management   = hiera('puppet_infra::profile::console::disable_live_management')
 
   validate_re($password_reset_expiration, '^\d+$')
   validate_re($session_timeout, '^\d+$')
@@ -26,5 +29,11 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
     group   => 'root',
     mode    => '0644',
     notify => Service['pe-console-services'],
+  }
+  class { 'puppet_infra::console':
+    timezone                => $timezone,
+    unresponsive_threshold  => $unresponsive_threshold,
+    disable_live_management => $disable_live_management,
+    require => Class['puppet_enterprise::profile::console'],
   }
 }

@@ -20,4 +20,10 @@ puppet_infra::profile::master::hiera_base: '"%{::settings::confdir}/environments
 # Set this to CPUS/2 or 1 for single CPU
 #puppet_enterprise::console::config::delayed_job_workers: 4
 
+puppet_infra::profile::console::timezone: 'GMT'
+puppet_infra::profile::console::unresponsive_threshold: '3600'
+puppet_infra::profile::console::disable_live_management: false
+
+
+
 
