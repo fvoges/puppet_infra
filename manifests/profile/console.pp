@@ -8,11 +8,13 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
   $failed_attempts_lockout   = hiera('puppet_infra::profile::console::failed_attempts_lockout')
   $timezone                  = hiera('puppet_infra::profile::console::timezone')
   $unresponsive_threshold    = hiera('puppet_infra::profile::console::unresponsive_threshold')
-  $disable_live_management   = hiera('puppet_infra::profile::console::disable_live_management')
+  $disable_live_management   = str2bool(hiera('puppet_infra::profile::console::disable_live_management'))
 
   validate_re($password_reset_expiration, '^\d+$')
   validate_re($session_timeout, '^\d+$')
   validate_re($failed_attempts_lockout, '^\d+$')
+  validate_bool($disable_live_management)
+
 
   include puppet_enterprise::license
   include puppet_enterprise::profile::console
