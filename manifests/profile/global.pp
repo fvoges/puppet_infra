@@ -10,6 +10,8 @@ class puppet_infra::profile::global {
   $certificate_authority_host   = hiera('puppet_infra::profile::global::certificate_authority_host')
   $disable_console              = str2bool(hiera('puppet_infra::profile::global::disable_console'))
   $console_host                 = hiera('puppet_infra::profile::global::console_host', '')
+  $disable_classifier           = str2bool(hiera('puppet_infra::profile::global::disable_classifier'))
+  $classifier_host              = hiera('puppet_infra::profile::global::classifier_host', '')
 
   validate_bool($disable_console)
   if ! $disable_console and ! $console_host {

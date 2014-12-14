@@ -17,4 +17,7 @@ puppet_infra::profile::master::hiera_backends:
   - 'yaml'
 puppet_infra::profile::master::hiera_base: '"%{::settings::confdir}/environments/%%{}{environment/hieradata"'
 
+# Set this to CPUS/2 or 1 for single CPU
+#puppet_enterprise::console::config::delayed_job_workers: 4
+
 
