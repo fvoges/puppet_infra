@@ -2,7 +2,7 @@
 #
 #
 class puppet_infra::console (
-  $timzone                 = $puppet_infra::params::console_timezone,
+  $timezone                = $puppet_infra::params::console_timezone,
   $unresponsive_threshold  = $puppet_infra::params::console_unresponsive_threshold,
   $disable_live_management = $puppet_infra::params::console_disable_live_management,
 ) inherits puppet_infra::params {
@@ -11,7 +11,8 @@ class puppet_infra::console (
   validate_bool($disable_live_management)
 
   File_line {
-    path => '/etc/puppetlabs/puppet-dashboard/settings.yml',
+    path   => '/etc/puppetlabs/puppet-dashboard/settings.yml',
+    notify => Service['pe-httpd'],
   }
 
   file_line { 'dashboard timezone':
