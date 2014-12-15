@@ -26,4 +26,6 @@ puppet_infra::profile::console::disable_live_management: false
 
 
 
-
+puppet_infra::profile::master::r10k::webhook_enabled: 'no'
+puppet_infra::profile::master::r10k::webhook_user: ''
+puppet_infra::profile::master::r10k::webhook_pass: ''
