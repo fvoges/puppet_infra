@@ -20,7 +20,7 @@ class puppet_infra::r10k::webhook (
     target => "/var/lib/peadmin/.mcollective.d/$::fqdn.private_key.pem",
   }
 
-  class { 'r10k::webhook::config':
+  class { '::r10k::webhook::config':
     certname       => $::fqdn,
     enable_ssl     => true,
     protected      => true,

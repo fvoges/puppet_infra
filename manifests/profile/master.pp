@@ -16,7 +16,7 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   validate_string($basemodulepath)
   validate_string($environmentpath)
 
-  Pe_Ini_setting {
+  Pe_ini_setting {
     ensure => present,
     path   => "${::settings::confdir}/puppet.conf",
   }
