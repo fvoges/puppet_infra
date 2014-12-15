@@ -28,7 +28,7 @@ class puppet_infra::r10k::webhook (
     user           => $pass,
   }
 
-  class {'r10k::webhook':
+  class {'::r10k::webhook':
     require => Class['r10k::webhook::config'],
   }
 
