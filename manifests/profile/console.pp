@@ -32,10 +32,21 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
     mode    => '0644',
     notify => Service['pe-console-services'],
   }
+
   class { 'puppet_infra::console':
     timezone                => $timezone,
     unresponsive_threshold  => $unresponsive_threshold,
     disable_live_management => $disable_live_management,
     require => Class['puppet_enterprise::profile::console'],
   }
+
+  file { '/etc/security/limits.d/10-pe-console-services.conf':
+    ensure => file,
+    source => "puppet:///modules/${module_name}/pe-console-services-limits.conf",
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    notify => Service['pe-puppetserver'],
+  }
+
 }
