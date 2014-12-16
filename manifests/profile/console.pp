@@ -46,7 +46,7 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    notify => Service['pe-puppetserver'],
+    notify => Service['pe-console-services'],
   }
 
 }
