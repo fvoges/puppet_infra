@@ -17,7 +17,23 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
 
 
   include puppet_enterprise::license
-  include puppet_enterprise::profile::console
+
+  # PE 3.7.0 doesn't expose delayed_job_workers
+  if $::pe_version == '3.7.0' {
+    include puppet_enterprise::profile::console
+  } else {
+    # Anything with less than 3 CPU cores will use just 1 worker
+    # everything else will use CPUs/2
+    if $processorcount > 3 {
+      $workers = $processorcount / 2
+    } else {
+      $workers = 1
+    }
+    class { 'puppet_enterprise::profile::console':
+      delayed_job_workers => $workers,
+    }
+  }
+
   include puppet_enterprise::profile::mcollective::console
 
   class { 'pe_console_prune':
