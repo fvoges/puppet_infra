@@ -11,7 +11,6 @@ class puppet_infra::console::logrotate {
     size          => '1G',
     missingok     => true,
     ifempty       => false,
-    missingok     => true,
     copytruncate  => true,
     compress      => true,
     create        => true,
