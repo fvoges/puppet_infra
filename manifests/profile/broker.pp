@@ -2,7 +2,9 @@
 #
 #
 class puppet_infra::profile::broker inherits puppet_infra::profile::global {
-  include puppet_enterprise::profile::amq::broker
+  include ::puppet_enterprise::profile::amq::broker
+  include ::puppet_infra::amq::logrotate
+
   file { '/etc/security/limits.d/10-pe-activemq.conf':
     ensure => file,
     source => "puppet:///modules/${module_name}/pe-activemq-limits.conf",

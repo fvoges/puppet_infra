@@ -15,12 +15,12 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
   validate_re($failed_attempts_lockout, '^\d+$')
   validate_bool($disable_live_management)
 
-
-  include puppet_enterprise::license
+  include ::puppet_enterprise::license
+  include ::puppet_infra::console::logrotate
 
   # PE 3.7.0 doesn't expose delayed_job_workers
   if $::pe_version == '3.7.0' {
-    include puppet_enterprise::profile::console
+    include ::puppet_enterprise::profile::console
   } else {
     # Anything with less than 3 CPU cores will use just 1 worker
     # everything else will use CPUs/2
@@ -34,7 +34,7 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
     }
   }
 
-  include puppet_enterprise::profile::mcollective::console
+  include ::puppet_enterprise::profile::mcollective::console
 
   class { 'pe_console_prune':
     prune_upto => $prune_upto,

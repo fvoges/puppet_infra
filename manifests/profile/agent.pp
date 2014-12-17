@@ -6,6 +6,8 @@ class puppet_infra::profile::agent {
   $server      = hiera('puppet_infra::profile::agent::server')
   $runinterval = hiera('puppet_infra::profile::agent::runinterval')
 
+  include ::puppet_infra::agent::logrotate
+
   class { '::puppet_infra::agent':
     agent_server       => $ca,
     agent_ca           => $server,
