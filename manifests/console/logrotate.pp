@@ -9,7 +9,6 @@ class puppet_infra::console::logrotate {
     rotate_every  => 'hour',
     rotate        => 7,
     size          => '1G',
-    missingok     => true,
     ifempty       => false,
     missingok     => true,
     copytruncate  => true,
