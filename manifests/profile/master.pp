@@ -42,6 +42,8 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   include ::pe_repo::platform::el_7_x86_64
   include ::puppet_enterprise::profile::mcollective::peadmin
   include ::puppet_enterprise::profile::master::mcollective
+  include ::puppet_infra::master::logrotate
+
 
   if $::puppet_infra::profile::global::disable_console {
     $console_host = ''
