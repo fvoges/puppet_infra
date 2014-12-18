@@ -20,7 +20,13 @@ class puppet_infra::console (
     match => '^time_zone.*:',
   }
 
-  file_line { 'dashboard unresponsive threshold':
+  file_line { 'dashboard unresponsive threshold 1':
+    line  => "no_longer_reporting_cutoff: ${unresponsive_threshold}",
+    match => '^no_longer_reporting_cutoff.*:',
+  }
+
+  file_line { 'dashboard unresponsive threshold 2':
+    path   => '/opt/puppet/share/puppet-dashboard/config/settings.yml',
     line  => "no_longer_reporting_cutoff: ${unresponsive_threshold}",
     match => '^no_longer_reporting_cutoff.*:',
   }
