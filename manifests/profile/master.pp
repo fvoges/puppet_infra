@@ -10,6 +10,7 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   $environmentpath   = hiera('puppet_infra::profile::master::environmentpath')
 
   validate_array($hiera_hierarchy)
+  validate_array($hiera_backends)
   validate_string($hiera_base)
   validate_string($pe_repo_base_path)
   validate_bool($manage_r10k)
