@@ -11,6 +11,7 @@
 <% if @hiera_backends.include? 'yaml' -%>
 :yaml:
   :datadir: '<%= @hiera_base %>'
+<% end -%>
 <% if @hiera_backends.include? 'eyaml' -%>
 :eyaml:
   :datadir: '<%= @hiera_base %>'
