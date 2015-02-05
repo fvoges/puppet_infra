@@ -67,6 +67,7 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
 
   class {'::puppet_infra::master::hiera':
     hiera_hierarchy => $hiera_hierarchy,
+    hiera_backends  => $hiera_backends,
     hiera_base      => $hiera_base,
   }
 
