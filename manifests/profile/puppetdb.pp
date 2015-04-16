@@ -3,6 +3,6 @@
 
 class puppet_infra::profile::puppetdb inherits puppet_infra::profile::global {
   include ::puppet_enterprise::profile::puppetdb
-  include ::puppet_infra::puppetdb::logrotate
+  #include ::puppet_infra::puppetdb::logrotate
 
 }

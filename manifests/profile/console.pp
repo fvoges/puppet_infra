@@ -16,7 +16,7 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
   validate_bool($disable_live_management)
 
   include ::puppet_enterprise::license
-  include ::puppet_infra::console::logrotate
+  #include ::puppet_infra::console::logrotate
 
   # PE 3.7.0 doesn't expose delayed_job_workers
   if $::pe_version == '3.7.0' {
