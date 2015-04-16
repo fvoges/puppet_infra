@@ -26,10 +26,8 @@ It was inspired by [beergeek/puppet_master](https://github.com/beergeek/puppet_m
 ### What puppet_infra affects
 
 On CA
-  * hiera.yaml
 
 On Compile only Masters
-  * hiera.yaml
 
 
 ### Setup requirements
