@@ -7,24 +7,12 @@ puppet_infra::profile::global::certificate_authority_host: 'puppetca.example.com
 puppet_infra::profile::global::console_host: 'console.example.com'
 puppet_infra::profile::console::prune_upto: '30'
 
-# weird escaping to work around jira:
-# https://tickets.puppetlabs.com/browse/HI-127
-puppet_infra::profile::master::hiera_hierarchy:
-  - '"host/%%{}{clientcert}"'
-  - '"location/%%{}{location}"'
-  - 'global'
-puppet_infra::profile::master::hiera_backends:
-  - 'yaml'
-puppet_infra::profile::master::hiera_base: '"%{::settings::confdir}/environments/%%{}{environment/hieradata"'
-
 # Set this to CPUS/2 or 1 for single CPU
 #puppet_enterprise::console::config::delayed_job_workers: 4
 
 puppet_infra::profile::console::timezone: 'GMT'
 puppet_infra::profile::console::unresponsive_threshold: '3600'
 puppet_infra::profile::console::disable_live_management: false
-
-
 
 puppet_infra::profile::master::r10k::webhook_enable: 'no'
 puppet_infra::profile::master::r10k::webhook_user: ''

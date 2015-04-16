@@ -16,7 +16,7 @@ class puppet_infra::console::logrotate {
     create_owner  => 'pe-console-services',
     create_group  => 'pe-console-services',
     create_mode   => '0640',
-  }  
+  }
 
   logrotate::rule { 'pe-httpd':
     ensure        => present,
