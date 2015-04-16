@@ -39,7 +39,7 @@ class puppet_infra::profile::master::r10k {
   exec {'r10k deploy environment -p':
     creates => "${environmentpath}/production/Puppetfile",
     command => '/opt/puppet/bin/r10k deploy environment -p',
-    require => Class['r10k'],
+    require => Class['::r10k'],
   }
 
 
