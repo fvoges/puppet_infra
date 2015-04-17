@@ -5,10 +5,13 @@ class puppet_infra::gemrc {
 
   if $managed {
     $clear_sources = str2bool(hiera('puppet_infra::gemrc::clear_sources'))
-    $sources       = hiera('puppet_infra::gemrc::sources')
+    $sources       = hiera('puppet_infra::gemrc::sources', undef)
 
     validate_bool($clear_sources)
-    validate_array($sources)
+
+    if $sources {
+      validate_array($sources)
+    }
 
     file { '/opt/puppet/etc':
       ensure => directory,
