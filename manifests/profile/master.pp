@@ -57,6 +57,7 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   class { '::puppet_enterprise::profile::master':
     console_host    => $console_host,
     classifier_host => $classifier_host,
+    enable_ca_proxy => true,
   }
 
   if $manage_r10k {
