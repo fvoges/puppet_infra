@@ -1,0 +1,11 @@
+---
+gem: --no-ri --no-rdoc
+<% if @clear_sources -%>
+:clear-sources: true
+<% end -%>
+<% if @sources -%>
+:sources:
+<% @sources.each do |source| -%>
+- '<%= source %>'
+<% end -%>
+<% end -%>
