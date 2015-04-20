@@ -30,13 +30,13 @@ class puppet_infra::profile::master::r10k {
     }
 
     class {'puppet_infra::r10k::webhook':
-      certname           => $webhook_certname,
-      protected          => $webhook_protected,
-      user               => $webhook_user,
-      pass               => $webhook_pass,
-      webhook_enable_ssl => $webhook_enable_ssl,
-      public_key_path    => $webhook_public_key_path,
-      private_key_path   => $webhook_private_key_path,
+      certname         => $webhook_certname,
+      protected        => $webhook_protected,
+      user             => $webhook_user,
+      pass             => $webhook_pass,
+      enable_ssl       => $webhook_enable_ssl,
+      public_key_path  => $webhook_public_key_path,
+      private_key_path => $webhook_private_key_path,
     }
   }
 
