@@ -2,8 +2,13 @@
 #
 #
 class puppet_infra::r10k::webhook (
-  $user,
-  $pass,
+  $certname         = $::fqdn,
+  $enable_ssl       = undef,
+  $protected        = undef,
+  $user             = undef,
+  $pass             = undef,
+  $public_key_path  = undef,
+  $private_key_path = undef,
 ) {
 
   include r10k::mcollective
@@ -21,11 +26,13 @@ class puppet_infra::r10k::webhook (
   }
 
   class { '::r10k::webhook::config':
-    certname       => $::fqdn,
-    enable_ssl     => true,
-    protected      => true,
-    pass           => $user,
-    user           => $pass,
+    certname         => $certname,
+    enable_ssl       => $enable_ssl,
+    protected        => $protected,
+    pass             => $user,
+    user             => $pass,
+    public_key_path  => $public_key_path,
+    private_key_path => $private_key_path,
   }
 
   class {'::r10k::webhook':

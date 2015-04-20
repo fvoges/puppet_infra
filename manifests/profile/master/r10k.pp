@@ -9,17 +9,34 @@ class puppet_infra::profile::master::r10k {
   $environmentpath = hiera('puppet_infra::profile::master::environmentpath')
   $webhook_enable  = str2bool(hiera('puppet_infra::profile::master::r10k::webhook_enable'))
 
-
   if $webhook_enable {
-    $webhook_pass  = hiera('puppet_infra::profile::master::r10k::webhook_user')
-    $webhook_user  = hiera('puppet_infra::profile::master::r10k::webhook_pass')
+    $webhook_certname         = hiera('puppet_infra::profile::master::r10k::webhook_certname', $::fqdn)
+    $webhook_enable_ssl       = str2bool(hiera('puppet_infra::profile::master::r10k::webhook_enable_ssl'))
+    $webhook_protected        = str2bool(hiera('puppet_infra::profile::master::r10k::webhook_protected'))
+    $webhook_user             = hiera('puppet_infra::profile::master::r10k::webhook_user', undef)
+    $webhook_pass             = hiera('puppet_infra::profile::master::r10k::webhook_pass', undef)
+    $webhook_public_key_path  = hiera('puppet_infra::profile::master::r10k::webhook_public_key_path', undef)
+    $webhook_private_key_path = hiera('puppet_infra::profile::master::r10k::webhook_private_key_path', undef)
 
-    validate_string($webhook_user)
-    validate_string($webhook_pass)
+    if $webhook_protected {
+      validate_string($webhook_user)
+      validate_string($webhook_pass)
+    }
+
+    if $webhook_enable_ssl {
+      validate_string($webhook_certname)
+      validate_absolute_path($webhook_public_key_path)
+      validate_absolute_path($webhook_private_key_path)
+    }
 
     class {'puppet_infra::r10k::webhook':
-      user => $webhook_user,
-      pass => $webhook_pass,
+      certname           => $webhook_certname,
+      protected          => $webhook_protected,
+      user               => $webhook_user,
+      pass               => $webhook_pass,
+      webhook_enable_ssl => $webhook_enable_ssl,
+      public_key_path    => $webhook_public_key_path,
+      private_key_path   => $webhook_private_key_path,
     }
   }
 
