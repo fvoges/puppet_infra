@@ -31,8 +31,9 @@ class puppet_infra::r10k::webhook (
     protected        => $protected,
     pass             => $user,
     user             => $pass,
-    public_key_path  => $public_key_path,
-    private_key_path => $private_key_path,
+    # New parameters available on the master branch only
+    #public_key_path  => $public_key_path,
+    #private_key_path => $private_key_path,
   }
 
   class {'::r10k::webhook':
