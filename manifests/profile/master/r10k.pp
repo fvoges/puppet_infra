@@ -4,10 +4,12 @@
 class puppet_infra::profile::master::r10k {
   $remote          = hiera('puppet_infra::profile::master::r10k::remote')
   $version         = hiera('puppet_infra::profile::master::r10k::version')
-  $install_options = hiera('puppet_infra::profile::master::r10k::install_options', '--no-ri --no-rdoc')
+  $install_options = hiera('puppet_infra::profile::master::r10k::install_options', ['--no-ri', '--no-rdoc'])
   $basemodulepath  = hiera('puppet_infra::profile::master::basemodulepath')
   $environmentpath = hiera('puppet_infra::profile::master::environmentpath')
   $webhook_enable  = str2bool(hiera('puppet_infra::profile::master::r10k::webhook_enable'))
+
+  validate_array($install_options)
 
   if $webhook_enable {
     $webhook_certname         = hiera('puppet_infra::profile::master::r10k::webhook_certname', $::fqdn)
@@ -58,6 +60,5 @@ class puppet_infra::profile::master::r10k {
     command => '/opt/puppet/bin/r10k deploy environment -p',
     require => Class['::r10k'],
   }
-
 
 }
