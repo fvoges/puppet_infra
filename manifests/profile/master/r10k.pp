@@ -4,7 +4,7 @@
 class puppet_infra::profile::master::r10k {
   $remote          = hiera('puppet_infra::profile::master::r10k::remote')
   $version         = hiera('puppet_infra::profile::master::r10k::version')
-  $install_options = hiera('puppet_infra::profile::master::r10k::install_options', undef)
+  $install_options = hiera('puppet_infra::profile::master::r10k::install_options', '--no-ri --no-rdoc')
   $basemodulepath  = hiera('puppet_infra::profile::master::basemodulepath')
   $environmentpath = hiera('puppet_infra::profile::master::environmentpath')
   $webhook_enable  = str2bool(hiera('puppet_infra::profile::master::r10k::webhook_enable'))
