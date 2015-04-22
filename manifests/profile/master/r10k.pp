@@ -58,6 +58,7 @@ class puppet_infra::profile::master::r10k {
   exec {'r10k deploy environment -p':
     creates => "${environmentpath}/production/Puppetfile",
     command => '/opt/puppet/bin/r10k deploy environment -p',
+    timeout => 600, # Some slow networks are slow
     require => Class['::r10k'],
   }
 
