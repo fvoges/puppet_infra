@@ -18,11 +18,13 @@ class puppet_infra::r10k::webhook (
   file { "/var/lib/peadmin/.mcollective.d/$::fqdn-cert.pem":
     ensure => link,
     target => "/var/lib/peadmin/.mcollective.d/$::fqdn.cert.pem",
+    before => Class['::r10k::webhook']
   }
 
   file { "/var/lib/peadmin/.mcollective.d/$::fqdn-private.pem":
     ensure => link,
     target => "/var/lib/peadmin/.mcollective.d/$::fqdn.private_key.pem",
+    before => Class['::r10k::webhook']
   }
 
   class { '::r10k::webhook::config':
