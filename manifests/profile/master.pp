@@ -1,15 +1,17 @@
 # Class: puppet_infra::profile::master
 #
 class puppet_infra::profile::master inherits puppet_infra::profile::global {
-  $pe_repo_base_path = hiera('puppet_infra::profile::master::pe_repo_base_path')
-  $manage_r10k       = str2bool(hiera('puppet_infra::profile::master::manage_r10k'))
-  $basemodulepath    = hiera('puppet_infra::profile::master::basemodulepath')
-  $environmentpath   = hiera('puppet_infra::profile::master::environmentpath')
+  $pe_repo_base_path  = hiera('puppet_infra::profile::master::pe_repo_base_path')
+  $manage_r10k        = str2bool(hiera('puppet_infra::profile::master::manage_r10k'))
+  $basemodulepath     = hiera('puppet_infra::profile::master::basemodulepath')
+  $environmentpath    = hiera('puppet_infra::profile::master::environmentpath')
+  $hiera_conf_symlink = str2bool(hiera('puppet_infra::profile::master::hiera_conf_symlink'))
 
   validate_string($pe_repo_base_path)
   validate_bool($manage_r10k)
   validate_string($basemodulepath)
   validate_string($environmentpath)
+  validate_bool($hiera_conf_symlink)
 
   Pe_ini_setting {
     ensure => present,
@@ -26,6 +28,13 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
     section => 'main',
     setting => 'basemodulepath',
     value   => $basemodulepath,
+  }
+
+  if $hiera_conf_symlink {
+    file { '/etc/puppetlabs/puppet/hiera.yaml':
+      ensure => link,
+      target => "${environmentpath}/production/hiera.yaml",
+    }
   }
 
   class { 'pe_repo':
