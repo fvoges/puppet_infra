@@ -31,7 +31,7 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   }
 
   if $hiera_conf_symlink {
-    file { '/etc/puppetlabs/puppet/hiera.yaml':
+    file { "${::settings::confdir}/hiera.yaml":
       ensure => link,
       target => "${environmentpath}/production/hiera.yaml",
     }
