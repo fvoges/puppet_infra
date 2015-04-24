@@ -34,6 +34,7 @@ class puppet_infra::profile::master {
     file { "${::settings::confdir}/hiera.yaml":
       ensure => link,
       target => "${environmentpath}/production/hiera.yaml",
+      notify => Service['pe-puppetserver'],
     }
   }
 
