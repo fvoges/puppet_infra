@@ -1,7 +1,7 @@
 # Class: puppet_infra::profile::console
 #
 #
-class puppet_infra::profile::console inherits puppet_infra::profile::global {
+class puppet_infra::profile::console {
   $prune_upto                = hiera('puppet_infra::profile::console::prune_upto')
   $password_reset_expiration = hiera('puppet_infra::profile::console::password_reset_expiration')
   $session_timeout           = hiera('puppet_infra::profile::console::session_timeout')
@@ -15,6 +15,7 @@ class puppet_infra::profile::console inherits puppet_infra::profile::global {
   validate_re($failed_attempts_lockout, '^\d+$')
   validate_bool($disable_live_management)
 
+  include ::puppet_infra::profile::global
   include ::puppet_enterprise::license
   #include ::puppet_infra::console::logrotate
 

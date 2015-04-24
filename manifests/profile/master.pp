@@ -1,6 +1,6 @@
 # Class: puppet_infra::profile::master
 #
-class puppet_infra::profile::master inherits puppet_infra::profile::global {
+class puppet_infra::profile::master {
   $pe_repo_base_path  = hiera('puppet_infra::profile::master::pe_repo_base_path')
   $manage_r10k        = str2bool(hiera('puppet_infra::profile::master::manage_r10k'))
   $basemodulepath     = hiera('puppet_infra::profile::master::basemodulepath')
@@ -41,6 +41,7 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
     base_path => $pe_repo_base_path,
   }
 
+  include ::puppet_infra::profile::global
 #  include ::pe_repo::platform::el_5_x86_64
 #  include ::pe_repo::platform::el_6_x86_64
   include ::pe_repo::platform::el_7_x86_64
@@ -48,7 +49,6 @@ class puppet_infra::profile::master inherits puppet_infra::profile::global {
   include ::puppet_enterprise::profile::master::mcollective
   include ::puppet_infra::gemrc
 #include ::puppet_infra::master::logrotate
-
 
   if $::puppet_infra::profile::global::disable_console {
     $console_host = ''
