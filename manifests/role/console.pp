@@ -8,6 +8,6 @@
 # base/common profile and nything else you require for your environment
 #
 class puppet_infra::role::console {
-  include puppet_infra::profile::console
-  include puppet_infra::profile::mcollective
+  include ::puppet_infra::profile::console
+  include ::puppet_infra::profile::mcollective
 }

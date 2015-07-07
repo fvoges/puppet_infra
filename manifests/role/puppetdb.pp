@@ -8,5 +8,5 @@
 # base/common profile and nything else you require for your environment
 #
 class puppet_infra::role::puppetdb {
-  include puppet_infra::profile::puppetdb
+  include ::puppet_infra::profile::puppetdb
 }
