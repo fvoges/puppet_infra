@@ -17,3 +17,63 @@ puppet_infra::profile::console::disable_live_management: false
 puppet_infra::profile::master::r10k::webhook_enable: 'no'
 puppet_infra::profile::master::r10k::webhook_user: ''
 puppet_infra::profile::master::r10k::webhook_pass: ''
+
+#PE3.7
+puppet_enterprise::profile::puppetdb::listen_address: '0.0.0.0'
+puppet_enterprise::profile::amq::broker::heap_mb: '4096'
+# If not set, the hub will use the broker setting
+puppet_enterprise::profile::amq::hub::heap_mb: 4096
+puppet_enterprise::profile::master::java_args:
+  Xmx: '4096m'
+  Xms: '4096m'
+#  'XX:MaxPermSize': '=96m'
+#  'XX:PermSize': '=96m'
+puppet_enterprise::profile::puppetdb::java_args:
+  Xmx: '8192m'
+  Xms: '8192m'
+puppet_enterprise::profile::console::java_args:
+  Xmx: '8192m'
+  Xms: '8192m'
+puppet_enterprise::master::puppetserver::jruby_max_active_instances: 4
+puppet_enterprise::profile::console::delayed_job_workers: 4
+#shared_buffers takes affect during install but is not managed after
+#puppet_enterprise::profile::database::shared_buffers: '4MB'
+
+puppet_infra::profile::global::mcollective_middleware_hosts:
+  - mcospoke01.example.com
+  - mcospoke02.example.com
+  - mcospoke03.example.com
+puppet_infra::profile::global::database_host: 'puppetdb.example.com'
+puppet_infra::profile::global::puppetdb_host: 'puppetdb.example.com'
+puppet_infra::profile::global::puppet_master_host: 'master.example.com'
+puppet_infra::profile::global::certificate_authority_host: 'puppetca.example.com'
+puppet_infra::profile::global::console_host: 'puppetconsole.example.com'
+#puppet_infra::profile::global::console_host: ''
+puppet_infra::profile::global::disable_console: 'no'
+puppet_infra::profile::global::disable_classifier: 'yes'
+
+puppet_infra::profile::console::prune_upto: '30'
+puppet_infra::profile::console::password_reset_expiration: '24'
+puppet_infra::profile::console::session_timeout: '14400'
+puppet_infra::profile::console::failed_attempts_lockout: '10'
+puppet_infra::profile::console::timezone: 'GMT'
+puppet_infra::profile::console::unresponsive_threshold: '3600'
+puppet_infra::profile::console::disable_live_management: false
+
+puppet_infra::profile::master::pe_repo_base_path: 'http://puppetca.example.com/'
+puppet_infra::profile::master::basemodulepath: '/etc/puppetlabs/puppet/modules:/opt/puppet/share/puppet/modules'
+puppet_infra::profile::master::environmentpath: '/etc/puppetlabs/puppet/environments'
+puppet_infra::profile::master::hiera_conf_symlink: 'yes'
+puppet_infra::profile::master::manage_r10k: 'yes'
+puppet_infra::profile::master::r10k::webhook_enable: 'yes'
+puppet_infra::profile::master::r10k::webhook_user: ''
+puppet_infra::profile::master::r10k::webhook_pass: ''
+puppet_infra::profile::master::r10k::remote: 'http://git.example.com/puppet/puppet-control.git'
+puppet_infra::profile::master::r10k::version: '1.5.1'
+puppet_infra::profile::master::r10k::webhook_enable_ssl: 'no'
+puppet_infra::profile::master::r10k::webhook_protected: 'no'
+
+puppet_infra::profile::master::hiera_conf_symlink: 'yes'
+puppet_infra::profile::master::manage_r10k: 'yes'
+puppet_infra::profile::master::r10k::webhook_enable: 'yes'
+puppet_infra::profile::master::r10k::webhook_user: ''
