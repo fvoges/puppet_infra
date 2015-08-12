@@ -2,7 +2,7 @@
 
 ## Table of contents
 
-<!-- Markd ownTOC  depth=0 -->
+<!-- MarkdownTOC  depth=0 -->
 
 - [Overview](#overview)
 - [Requirements](#requirements)
@@ -25,16 +25,23 @@
 <!-- /MarkdownTOC -->
 
 
-1. [Overview](#overview)
-1. [Requirements](#requirements)
-1. [Module description](#module-description)
-1. [Setup - The basics of getting started with puppet_infra](#setup)
-    * [What `puppet_infra` affects](#what-infra-affects)
-    * [Beginning with `puppet_infra`](#beginning-with-puppet_infra)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Module Description](#module-description)
+- [Setup](#setup)
+  - [What `puppet_infra` affects](#what-puppet_infra-affects)
+    - [On CA](#on-ca)
+    - [On Puppet DB](#on-puppet-db)
+    - [On Console](#on-console)
+    - [On MCollective Hub and Spoke](#on-mcollective-hub-and-spoke)
+    - [On Compile only Masters](#on-compile-only-masters)
+    - [On the Puppet Agents](#on-the-puppet-agents)
+  - [Beginning with `puppet_infra`](#beginning-with-puppet_infra)
+    - [Configuration](#configuration)
+- [Usage](#usage)
+- [Reference](#reference)
+- [Limitations](#limitations)
+- [Development](#development)
 
 ## Overview
 
@@ -157,8 +164,6 @@ class puppet_infra::role::allinone {
 The PE infrastruture then can be configured with Hiera. Here's an example:
 
 ```yaml
-
----
 #PE3.7
 puppet_enterprise::profile::puppetdb::listen_address: '0.0.0.0'
 puppet_enterprise::profile::amq::broker::heap_mb: '4096'
