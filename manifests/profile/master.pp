@@ -2,16 +2,20 @@
 #
 class puppet_infra::profile::master {
   $pe_repo_base_path  = hiera('puppet_infra::profile::master::pe_repo_base_path')
+  $pe_repo_platforms  = hiera('puppet_infra::profile::master::pe_repo_platforms')
   $manage_r10k        = str2bool(hiera('puppet_infra::profile::master::manage_r10k'))
   $basemodulepath     = hiera('puppet_infra::profile::master::basemodulepath')
   $environmentpath    = hiera('puppet_infra::profile::master::environmentpath')
   $hiera_conf_symlink = str2bool(hiera('puppet_infra::profile::master::hiera_conf_symlink'))
 
   validate_string($pe_repo_base_path)
+  validate_array($pe_repo_platforms)
   validate_bool($manage_r10k)
   validate_string($basemodulepath)
   validate_string($environmentpath)
   validate_bool($hiera_conf_symlink)
+
+  $pe_repos = regsubst($pe_repo_platforms, '^(.*)$', '::pe_repo::platform::\1')
 
   Pe_ini_setting {
     ensure => present,
@@ -43,9 +47,9 @@ class puppet_infra::profile::master {
   }
 
   include ::puppet_infra::profile::global
-#  include ::pe_repo::platform::el_5_x86_64
-#  include ::pe_repo::platform::el_6_x86_64
-  include ::pe_repo::platform::el_7_x86_64
+
+  include $pe_repos
+
   include ::puppet_enterprise::profile::mcollective::peadmin
   include ::puppet_enterprise::profile::master::mcollective
   include ::puppet_infra::gemrc

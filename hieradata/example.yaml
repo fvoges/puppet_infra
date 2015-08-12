@@ -21,16 +21,6 @@ puppet_enterprise::profile::console::delayed_job_workers: 4
 #shared_buffers takes affect during install but is not managed after
 #puppet_enterprise::profile::database::shared_buffers: '4MB'
 
-puppet_infra::profile::global::database_host: 'puppetdb.example.com'
-puppet_infra::profile::global::puppetdb_host: 'puppetdb.example.com'
-puppet_infra::profile::global::puppet_master_host: 'puppetmaster.example.com'
-puppet_infra::profile::global::certificate_authority_host: 'puppetca.example.com'
-puppet_infra::profile::global::console_host: 'console.example.com'
-puppet_infra::profile::console::prune_upto: '30'
-
-puppet_infra::profile::console::timezone: 'GMT'
-puppet_infra::profile::console::unresponsive_threshold: '3600'
-puppet_infra::profile::console::disable_live_management: false
 
 puppet_infra::profile::master::r10k::webhook_enable: 'no'
 puppet_infra::profile::master::r10k::webhook_user: ''
@@ -38,10 +28,16 @@ puppet_infra::profile::master::r10k::webhook_pass: ''
 
 puppet_infra::profile::global::mcollective_middleware_hosts:
   - 'puppetca.example.com'
+  # - '%{fqdn}'
   # - 'mcospoke01.example.com'
   # - 'mcospoke02.example.com'
   # - 'mcospoke03.example.com'
 
+# puppet_infra::profile::global::database_host: '%{fqdn}'
+# puppet_infra::profile::global::puppetdb_host: '%{fqdn}'
+# puppet_infra::profile::global::puppet_master_host: '%{fqdn}'
+# puppet_infra::profile::global::certificate_authority_host: '%{fqdn}'
+# puppet_infra::profile::global::console_host: '%{fqdn}'
 puppet_infra::profile::global::database_host: 'puppetdb.example.com'
 puppet_infra::profile::global::puppetdb_host: 'puppetdb.example.com'
 puppet_infra::profile::global::puppet_master_host: 'master.example.com'
@@ -60,6 +56,9 @@ puppet_infra::profile::console::unresponsive_threshold: '3600'
 puppet_infra::profile::console::disable_live_management: false
 
 puppet_infra::profile::master::pe_repo_base_path: 'https://pm.puppetlabs.com/puppet-enterprise'
+puppet_infra::profile::master::pe_repo_platforms:
+  - 'el_6_x86_64'
+  - 'el_7_x86_64'
 puppet_infra::profile::master::basemodulepath: '/etc/puppetlabs/puppet/modules:/opt/puppet/share/puppet/modules'
 puppet_infra::profile::master::environmentpath: '/etc/puppetlabs/puppet/environments'
 puppet_infra::profile::master::hiera_conf_symlink: 'no'
