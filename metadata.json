@@ -1,0 +1,12 @@
+{
+    "author": "fvoges",
+    "dependencies": [],
+    "description": "Module to manage a Multi Master Puppet Enterprise environment with the CA acting as Master of Masters and multiple compile masters",
+    "issues_url": "https://github.com/fvoges/puppet_infra/issues",
+    "license": "MIT",
+    "name": "fvoges-puppet_infra",
+    "project_page": "https://github.com/fvoges/puppet_infra/issues",
+    "source": "https://github.com/fvoges/puppet_infra",
+    "summary": "Puppet Enterprise multi master with CA as MoM",
+    "version": "0.0.1"
+}
